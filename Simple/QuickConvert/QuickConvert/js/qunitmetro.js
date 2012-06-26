@@ -34,7 +34,7 @@
         })
 
     });
-
+   
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
@@ -258,6 +258,14 @@
                 a.innerHTML = window.toStaticHTML("Rerun");
                 a.href = QUnit.url({ filter: getText([b]).replace(/\([^)]+\)$/, "").replace(/(^\s*|\s*$)/g, "") });
 
+                addEvent(a, "click", function (event) {
+                    QUnit.stop();
+                    QUnit.config.filter = getText([b]).replace(/\([^)]+\)$/, "").replace(/(^\s*|\s*$)/g, "");
+                    QUnit.start();
+                    event.preventDefault();
+                    return false;
+                });
+
                 addEvent(b, "click", function () {
                     var next = b.nextSibling.nextSibling,
 					display = next.style.display;
@@ -269,9 +277,9 @@
                     if (target.nodeName.toLowerCase() == "span" || target.nodeName.toLowerCase() == "b") {
                         target = target.parentNode;
                     }
-                    if (window.location && target.nodeName.toLowerCase() === "strong") {
-                        window.location = QUnit.url({ filter: getText([target]).replace(/\([^)]+\)$/, "").replace(/(^\s*|\s*$)/g, "") });
-                    }
+                    QUnit.stop();
+                    QUnit.config.filter = getText([b]).replace(/\([^)]+\)$/, "").replace(/(^\s*|\s*$)/g, "");
+                    QUnit.start();
                 });
 
                 li = id(this.id);
@@ -825,22 +833,33 @@
         for (var i = 0, val; i < len; i++) {
             val = config.urlConfig[i];
             config[val] = QUnit.urlParams[val];
-            urlConfigHtml += '<label><input name="' + val + '" type="checkbox"' + (config[val] ? ' checked="checked"' : '') + '>' + val + '</label>';
+            urlConfigHtml += '<label><input id="' + val + '" type="checkbox"' + (config[val] ? ' checked="checked"' : '') + '>' + val + '</label>';
         }
 
         var userAgent = id("qunit-userAgent");
         if (userAgent) {
             userAgent.innerHTML = window.toStaticHTML(navigator.userAgent);
         }
-
+        
         var banner = id("qunit-header");
         if (banner) {
 
             banner.innerHTML = window.toStaticHTML('<a href="' + QUnit.url({ filter: undefined }) + '"> ' + banner.innerHTML + '</a> ' + urlConfigHtml);
             addEvent(banner, "change", function (event) {
-                var params = {};
-                params[event.target.name] = event.target.checked ? true : undefined;
-                window.location = QUnit.url(params);
+                //var params = {};
+                //params[event.target.id] = event.target.checked ? true : undefined;
+                //window.location = QUnit.url(params);
+                QUnit.stop();
+                QUnit.config[event.target.id] = event.target.checked;
+                QUnit.start();
+            });
+            var appName = banner.getElementsByTagName("a")[0];
+            addEvent(appName, "click", function (event) {
+                QUnit.stop();
+                QUnit.config.filter = "";
+                QUnit.start();
+                event.preventDefault();
+                return false;
             });
         }
 
@@ -1001,16 +1020,16 @@
             // Opera
             return e.stacktrace.split("\n")[offset + 3];
         } else if (e.stack) {
-                // Firefox, Chrome
+            // Firefox, Chrome
             var stack = e.stack.split("\n");
             if (/^error$/i.test(stack[0])) {
                 stack.shift();
             }
             return stack[offset];
         } else if (e.sourceURL) {
-                // Safari, PhantomJS
-                // hopefully one day Safari provides actual stacktraces
-                // exclude useless self-reference for generated Error objects
+            // Safari, PhantomJS
+            // hopefully one day Safari provides actual stacktraces
+            // exclude useless self-reference for generated Error objects
             if (/qunit.js$/.test(e.sourceURL)) {
                 return;
             }
@@ -1280,8 +1299,8 @@
                         // objects with Object as their constructor.
                         if (!((getProto(a) === null && getProto(b) === Object.prototype) ||
 						(getProto(b) === null && getProto(a) === Object.prototype))) {
-                            return false;
-                        }
+						    return false;
+						}
                     }
 
                     // stack constructor before traversing properties
@@ -1331,10 +1350,10 @@
                 } else if (a === null || b === null || typeof a === "undefined" ||
 					typeof b === "undefined" ||
 					QUnit.objectType(a) !== QUnit.objectType(b)) {
-                    return false; // don't lose time with error prone cases
-                } else {
-                    return bindCallbacks(a, callbacks, [b, a]);
-                }
+					    return false; // don't lose time with error prone cases
+					} else {
+					    return bindCallbacks(a, callbacks, [b, a]);
+					}
 
                 // apply transition with (1..n) arguments
             }(args[0], args[1]) && arguments.callee.apply(this, args.splice(1, args.length - 1)));
@@ -1428,10 +1447,10 @@
                         // NodeList objects
 				(typeof obj.length === "number" && typeof obj.item !== "undefined" && (obj.length ? obj.item(0) === obj[0] : (obj.item(0) === null && typeof obj[0] === "undefined")))
 			) {
-                    type = "array";
-                } else {
-                    type = typeof obj;
-                }
+			    type = "array";
+			} else {
+			    type = typeof obj;
+			}
                 return type;
             },
             separator: function () {
@@ -1645,29 +1664,29 @@
             for (i = 0; i < n.length - 1; i++) {
                 if (n[i].text != null && n[i + 1].text == null && n[i].row + 1 < o.length && o[n[i].row + 1].text == null &&
 			n[i + 1] == o[n[i].row + 1]) {
-                    n[i + 1] = {
-                        text: n[i + 1],
-                        row: n[i].row + 1
-                    };
-                    o[n[i].row + 1] = {
-                        text: o[n[i].row + 1],
-                        row: i + 1
-                    };
-                }
+			    n[i + 1] = {
+			        text: n[i + 1],
+			        row: n[i].row + 1
+			    };
+			    o[n[i].row + 1] = {
+			        text: o[n[i].row + 1],
+			        row: i + 1
+			    };
+			}
             }
 
             for (i = n.length - 1; i > 0; i--) {
                 if (n[i].text != null && n[i - 1].text == null && n[i].row > 0 && o[n[i].row - 1].text == null &&
 			n[i - 1] == o[n[i].row - 1]) {
-                    n[i - 1] = {
-                        text: n[i - 1],
-                        row: n[i].row - 1
-                    };
-                    o[n[i].row - 1] = {
-                        text: o[n[i].row - 1],
-                        row: i - 1
-                    };
-                }
+			    n[i - 1] = {
+			        text: n[i - 1],
+			        row: n[i].row - 1
+			    };
+			    o[n[i].row - 1] = {
+			        text: o[n[i].row - 1],
+			        row: i - 1
+			    };
+			}
             }
 
             return {
