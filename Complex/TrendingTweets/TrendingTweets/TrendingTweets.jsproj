@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>290feed9-1285-4151-b3ab-343d7fd2b241</ProjectGuid>
+    <ProjectGuid>da9ffca7-2e66-414d-bedb-31248f4011a9</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
@@ -44,28 +44,30 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>QuickConvert_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TrendingTweets_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="..\..\..\Shared\QUnitMetro\qunitmetro-dark.css">
-      <Link>css\qunitmetro-dark.css</Link>
-    </Content>
-    <Content Include="..\..\..\Shared\QUnitMetro\qunitmetro.js">
-      <Link>js\qunitmetro.js</Link>
-    </Content>
-    <Content Include="default.html" />
+    <Content Include="css\default.css" />
     <Content Include="images\logo.png" />
     <Content Include="images\smalllogo.png" />
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
+    <Content Include="js\data.js" />
     <Content Include="js\default.js" />
-    <Content Include="css\default.css" />
-    <Content Include="js\tests.js" />
-    <Content Include="js\unitConverter.js" />
-    <None Include="QuickConvert_TemporaryKey.pfx" />
+    <Content Include="js\navigator.js" />
+    <Content Include="js\TrendingTweets.ViewModels.js" />
+    <Content Include="js\TwitterAPI.js" />
+    <Content Include="pages\items\items.css" />
+    <Content Include="pages\items\items.html" />
+    <Content Include="pages\items\items.js" />
+    <Content Include="pages\split\split.css" />
+    <Content Include="pages\split\split.html" />
+    <Content Include="pages\split\split.js" />
+    <Content Include="default.html" />
+    <None Include="TrendingTweets_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS.1.0.RC, Version=1.0" />

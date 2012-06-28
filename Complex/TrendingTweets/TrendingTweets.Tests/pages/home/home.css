@@ -1,0 +1,39 @@
+﻿.home p {
+    margin-left: 120px;
+}
+.home .itemslist {
+    padding-bottom: 60px;
+    padding-left: 115px;
+    padding-top: 7px;
+    height: 100%;
+    position: relative;
+    /*width: 100%;*/
+    z-index: 0;
+}
+
+.failCount {
+    color: #f00;
+}
+
+.passCount {
+    color: #00ff21;
+}
+
+.totalCount {
+    font-weight: bold;
+}
+
+.testResult {
+    width: 16px;
+    height: 32px;
+    margin: 6px;
+    float: left;
+}
+
+.failedResult {
+    background-color: #f00;
+}
+
+.passedResult {
+    background-color: #00ff21;
+}

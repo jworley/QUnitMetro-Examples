@@ -1,0 +1,38 @@
+﻿.detail p {
+    margin-left: 120px;
+}
+
+.detail .itemslist {
+    padding-bottom: 60px;
+    padding-left: 115px;
+    padding-top: 7px;
+    padding-right: 196px;
+    height: 100%;
+    position: relative;
+    width: 420px;
+    z-index: 0;
+}
+
+.detail .itemlist .win-container .win-selectioncheckmark {
+    display: none;
+}
+
+.detail .itemlist .win-container .win-selectioncheckmarkbackground {
+    display: none;
+}
+
+.detail .itemlist .win-item {
+    height: 110px;
+    width: 500px;
+}
+
+.sidebar {
+    float: right;
+    width: 260px;
+}
+.testResult {
+    width: 16px;
+    height: 32px;
+    margin: 6px;
+    float: left;
+}

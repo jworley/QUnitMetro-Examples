@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>splitPage</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0.RC/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0.RC/js/ui.js"></script>
+    
+    <link href="/css/default.css" rel="stylesheet" />
+    <link href="/pages/split/split.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/TwitterAPI.js"></script>
+    <script type="text/javascript" src="/js/TrendingTweets.ViewModels.js"></script>
+    <script src="/pages/split/split.js"></script>
+</head>
+<body>
+    <!-- This template is used to display each item in the ListView declared below. -->
+    <div id="tweetTemplate" class="itemtemplate" data-win-control="WinJS.Binding.Template">
+        <img class="item-image" src="#" data-win-bind="src: profile_image_url; alt: from_user" />
+        <div class="item-info">
+            <h3 class="item-title win-type-ellipsis" data-win-bind="textContent: from_user"></h3>
+            <h6 class="item-subtitle win-type-ellipsis"></h6>
+            <h4 class="item-description" data-win-bind="textContent: text"></h4>
+        </div>
+    </div>
+
+    <!-- The content that will be loaded and displayed. -->
+    <div class="splitpage fragment" data-win-bindsource="TrendingTweets.ViewModels.splitViewModel">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle" data-win-bind="innerText: topicName"></span>
+            </h1>
+        </header>
+        <div class="itemlistsection" aria-label="List column">
+            <div class="itemlist" aria-label="List of this group's items"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{ selectionMode: 'single', tapBehavior: 'toggleSelect', itemDataSource: TrendingTweets.ViewModels.splitViewModel.tweets.dataSource, itemTemplate: select('#tweetTemplate'), oniteminvoked: TrendingTweets.ViewModels.splitViewModel.tweetSelected }"></div>
+        </div>
+        <div class="articlesection" aria-atomic="true" aria-label="Item detail column" aria-live="assertive">
+            <article>
+                <header class="header">
+                    <div class="text">
+                        <h2 class="article-title win-type-ellipsis" data-win-bind="textContent: selectedTweet.from_user"></h2>
+                        <h4 class="article-subtitle" data-win-bind="textContent: selectedTweet.from_user_name"></h4>
+                    </div>
+                    <img class="article-image" src="#" data-win-bind="src: selectedTweet.profile_image_url; alt: selectedTweet.from_user" />
+                </header>
+                <div class="article-content" data-win-bind="innerHTML: selectedTweet.text"></div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

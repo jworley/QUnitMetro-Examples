@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>290feed9-1285-4151-b3ab-343d7fd2b241</ProjectGuid>
+    <ProjectGuid>b65448c9-525a-4734-ac03-fc91f8d3443c</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
@@ -44,7 +44,7 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>QuickConvert_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TrendingTweets.Tests_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -56,6 +56,12 @@
     <Content Include="..\..\..\Shared\QUnitMetro\qunitmetro.js">
       <Link>js\qunitmetro.js</Link>
     </Content>
+    <Content Include="..\TrendingTweets\js\TrendingTweets.ViewModels.js">
+      <Link>js\TrendingTweets.ViewModels.js</Link>
+    </Content>
+    <Content Include="..\TrendingTweets\js\TwitterAPI.js">
+      <Link>js\TwitterAPI.js</Link>
+    </Content>
     <Content Include="default.html" />
     <Content Include="images\logo.png" />
     <Content Include="images\smalllogo.png" />
@@ -63,9 +69,16 @@
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\navigator.js" />
+    <Content Include="js\qunitmetro.testharness.js" />
     <Content Include="js\tests.js" />
-    <Content Include="js\unitConverter.js" />
-    <None Include="QuickConvert_TemporaryKey.pfx" />
+    <Content Include="pages\detail\detail.css" />
+    <Content Include="pages\detail\detail.html" />
+    <Content Include="pages\detail\detail.js" />
+    <Content Include="pages\home\home.css" />
+    <Content Include="pages\home\home.html" />
+    <Content Include="pages\home\home.js" />
+    <None Include="TrendingTweets.Tests_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS.1.0.RC, Version=1.0" />

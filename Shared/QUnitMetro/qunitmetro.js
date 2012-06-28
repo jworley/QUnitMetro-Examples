@@ -26,7 +26,10 @@
 
         runTests: WinJS.Utilities.markSupportedForProcessing(function () {
             QUnit.start();
-            document.getElementById("unitTestContainer").style.display = "block";
+            var testContainer = document.getElementById("unitTestContainer");
+            if (testContainer) {
+                testContainer.style.display = "block";
+            }
         }),
 
         closeResults: WinJS.Utilities.markSupportedForProcessing(function () {

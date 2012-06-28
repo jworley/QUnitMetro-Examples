@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0.RC/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0.RC/js/ui.js"></script>
+
+    <link href="home.css" rel="stylesheet" />
+    <script src="home.js"></script>
+</head>
+<body>
+    <div id="testTemplate" class="itemtemplate" data-win-control="WinJS.Binding.Template">
+        <div class="testResult" data-win-bind="style.backgroundColor: failed QUnitMetro.TestHarness.ViewModels.failedToColor"></div>
+        <div class="item-overlay">
+            <h2 class="item-title win-type-x-large" data-win-bind="textContent: module"></h2>
+            <h4 class="item-title win-type-large" data-win-bind="textContent: name"></h4>
+            <div class="win-type-small">
+                (
+                <span class="failCount" data-win-bind="textContent: failed"></span>
+                ,
+                <span class="passCount" data-win-bind="textContent: passed"></span>
+                ,
+                <span class="totalCount" data-win-bind="textContent: total"></span>
+                )
+            </div>
+        </div>
+    </div>
+    <div class="home fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">TrendingTweet.Tests</span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div class="itemslist" aria-label="List of groups"
+                data-win-control="WinJS.UI.ListView"
+                data-win-options="{ selectionMode: 'none', itemDataSource: QUnitMetro.TestHarness.ViewModels.homeViewModel.testResults.dataSource, itemTemplate: select('#testTemplate'), oniteminvoked: QUnitMetro.TestHarness.ViewModels.homeViewModel.testResultSelected }">
+            </div>
+        </section>
+    </div>
+</body>
+</html>
