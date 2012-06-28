@@ -23,6 +23,7 @@
 
         .itemspage .itemslist .win-item .item-image {
             -ms-grid-row-span: 2;
+            background-color: #72cff0;
         }
 
         .itemspage .itemslist .win-item .item-overlay {
