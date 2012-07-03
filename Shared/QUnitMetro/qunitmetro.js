@@ -1,14 +1,10 @@
 ﻿/**
- * QUnit-Metro v0.3.0 - A Unit Testing Framework based on QUnit for WinJS Metro applications
+ * QUnit-Metro v0.4.0 - A Unit Testing Framework based on QUnit for WinJS Metro applications
  *
  * http://qunitmetro.github.com
  *
- * Copyright (c) 2012 Jason A. Worley
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * or GPL (GPL-LICENSE.txt) licenses.
- *
- * Based on QUnitMetro
- * Copyright (c) 2012 Jeffrey T. Fritz
+ * QUnitMetro
+ * Copyright (c) 2012 Jeffrey T. Fritz, Jason A. Worley
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * or GPL (GPL-LICENSE.txt) licenses.
  *
@@ -26,15 +22,30 @@
 
         runTests: WinJS.Utilities.markSupportedForProcessing(function () {
             QUnit.start();
-            var testContainer = document.getElementById("unitTestContainer");
-            if (testContainer) {
-                testContainer.style.display = "block";
+            var contain = document.getElementById("unitTestContainer");
+            if (contain) {
+                contain.style.display = "block";
             }
         }),
 
         closeResults: WinJS.Utilities.markSupportedForProcessing(function () {
-            document.getElementById("unitTestContainer").style.display = "none";
-        })
+            var contain = document.getElementById("unitTestContainer");
+            if (contain) {
+                contain.style.display = "none";
+            }
+        }),
+
+        autoLoadTests: function (e) {
+            var re = new RegExp("([^/]+\.html$)");
+            var testUrl = e.detail.location.replace(re, QUnit.config.unitTestFileName);
+
+            if (!QUnit.id(testUrl)) {
+                var scriptEl = document.createElement("script");
+                scriptEl.setAttribute("id", testUrl);
+                scriptEl.setAttribute("src", testUrl);
+                document.head.appendChild(scriptEl);
+            }
+        }
 
     });
    
@@ -68,6 +79,10 @@
             args.setPromise(WinJS.UI.processAll());
         }
     });
+
+    // Auto test loading
+    WinJS.Navigation.addEventListener("navigated", QUnitMetro.autoLoadTests);
+
 })();
 
 (function (window) {
@@ -556,6 +571,9 @@
 
         // by default, build the DOM elements to display test results
         buildResultsUI: true,
+
+        // by default, the name of the unitTest script file
+        unitTestFileName: "test.js",
 
         urlConfig: ['noglobals', 'notrycatch'],
 
